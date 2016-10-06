@@ -1,9 +1,11 @@
 # sumUp
-sumUp() is a more powerful replacement for difference(): 
-it is an openscad prefix library that allows to add holes in modules and allows more flexibe but descriptive syntax by using predicates. it usually requires less nesting in your code. it is very compacts: only 2 pages in a single file you need,
+*sumUp()* is a more powerful replacement for *difference()* 
 
-Use sumUp() where you have used difference() before,
-just add predicates like add(), remove() or addAfterRemoving() to each block inside of your difference()(which is now sumUp() of course)
+it is an openscad prefix library that allows to add holes in modules and allows more flexibe, but descriptive syntax by using predicates. it usually requires less nesting in your code. 
+it is very compact: only 2 pages in a single file you need
+
+Use *sumUp()* where you have used *difference()* before,
+just add one of predicates like *add()*, *remove()* or *addAfterRemoving()* to each block inside of your difference()(which is now a *sumUp()* of course)
 ```c#
 include<sumup.scad>
 sumUp()
