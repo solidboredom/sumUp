@@ -2,7 +2,7 @@
 *sumUp()* is a more powerful replacement for openscads *difference()* 
 
 it allows you to add holes in modules and a more flexibe, but descriptive syntax by using _predicates_. it usually requires less nesting in your code. 
-it is very compact: only 2 pages in a single icnlude file you will need
+it is very compact: only 2 pages in a single include file you will need
 
 Use *sumUp()* where you have used *difference()* before,
 just add one of predicates like *add()*, *remove()* or *addAfterRemoving()* to each block inside of your difference()(which is now a *sumUp()* of course)
@@ -21,8 +21,8 @@ sumUp()
 ![screeen](/images/sumUpExample1.png)
 
 unlike _difference()_ where  the first line or the first block inside the _difference()_'s curly brackets is THE THING you subtract from, 
-inside the _sumUp()_ the first line or block can be any of add or remove predictes. that is - the first line or block inside its curly barckets has no special meaning in sumUp(). so you can constuct a solid from several lines/block/modues. you do not have to use _union()_ to put them all together into the first block/line of the _difference()_.
-then you can remove from this "summed" solid in the same single _sumUp()_
+inside the _sumUp()_ the first line or block can be any of add or remove predictes. that is - the first line or block inside its curly barckets has no special meaning in sumUp(). so you can constuct a solid from several lines/blocks/modues. you do not have to use _union()_ to put them all together into the first block/line of the _difference()_.
+then you can remove from this "summed" solid in the same single _sumUp()_ (and even add again, but this i further down)
 ```c#
 include<sumup.scad>
 
@@ -45,7 +45,7 @@ sumUp()
 _sumUp()_ uses the prediacte to recognize if the block is to be removed, removed from, or added after all removing is done. 
 
 you can move the predicates inside your modules, and call the module without any predicate.
-the module itself then uses predicates to add new things, bore holes, and say add bolts inside new holes to your part.
+the module itself then uses predicates to add new things, *bore holes in other solids* of _SumUp()_, and say add bolts inside new holes to your part.
 
 but YOU CAN use your old modules which do not use predicates:
 either without touching them:
