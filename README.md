@@ -13,7 +13,7 @@ sumUp()
 		remove()
 			cylinder(h=15,d=8,$fn=10);
 }
-![GitHub Logo](/images/logo.png)
+![screeen](/images/sumUpExample1.png)
 unlike difference() wher the first block is the thing you subtract from, the first block inside sumUp can be any of add or remove predictes. sumUp uses the prediacte to recognize if the blocki to be rmoved, removed from, or added after all removing is done. fiurther you can move the predicates inside you modules ,and cal the modue withut predicate: the modue itself uses the predicates to add new things, bore holes, and say add bolts to yuor part. you just put the predicates in front of parts of your module which du it(see below)
 
 example of  possibilities:
