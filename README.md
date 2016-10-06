@@ -1,8 +1,8 @@
 # sumUp
-*sumUp()* is a more powerful replacement for openscads *difference()* 
+*sumUp()* ispowerful replacement for openscads *difference()* (although you still might want to use _difference()_ in some cases - so it is a comletion)
 
-it allows you to add holes in modules and a more flexibe, but descriptive syntax by using _predicates_. it usually requires less nesting in your code. 
-it is very compact: only 2 pages in a single include file you will need
+it allows you to ADD HOLES in modules and a more flexibe, but descriptive syntax by using _predicates_. it usually requires less nesting in your code than _difference()_. 
+it is very compact: only two pages of code in a single include file you will need.
 
 Use *sumUp()* where you have used *difference()* before,
 just add one of predicates like *add()*, *remove()* or *addAfterRemoving()* to each block inside of your difference()(which is now a *sumUp()* of course)
@@ -23,7 +23,7 @@ sumUp()
 
 unlike _difference()_ where  the first line or the first block inside the _difference()_'s curly brackets is THE THING you subtract from, 
 inside the _sumUp()_ the first line or block can be any of add or remove predictes. that is - the first line or block inside its curly barckets has no special meaning in sumUp(). so you can constuct a solid from several lines/blocks/modues. you do not have to use _union()_ to put them all together into the first block/line of the _difference()_.
-then you can remove from this "summed" solid in the same single _sumUp()_ (and even add again, but this i further down)
+then you can remove from this "summed" solid in the same single _sumUp()_ (and even add again, but more on this further down)
 ```c#
 include<sumup.scad>
 
@@ -42,9 +42,10 @@ sumUp()
 ```
 
 ![screeen](/images/sumUpExample2.png)
+
 _sumUp()_ uses the prediacte to recognize if the block is to be removed, removed from, or added after all removing is done. 
 
-_TIP: it makes no difference if you put your translate or rotate operations in front or after the predicate(say translate([...])add()cube(...); is the sme as add()translate([...])cube(...);  this allows you to group several removes() or add() in single translate() transformation. this has simplifyed the things alot for me)
+*TIP: it makes no difference if you put your translate or rotate operations in front or after the predicate(say translate([...])add()cube(...); is the sme as add()translate([...])cube(...);  this allows you to group several removes() or add() in single translate() transformation. this has simplifyed the things alot for me)*
 
 
 you can move the predicates inside your modules, and call the module without any predicate.
