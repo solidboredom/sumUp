@@ -1,32 +1,55 @@
 # sumUp
-sumUp() is more powerful than difference(): it is an openscad prefix library that allows to add holes in modules and allows more flexibe but descriptive syntax by using predicates.
+sumUp() is a more powerful replacement for difference(): 
+it is an openscad prefix library that allows to add holes in modules and allows more flexibe but descriptive syntax by using predicates. it usually requires less nesting in your code. it is very compacts: only 2 pages in a single file you need,
 
-Use sumUp() instead where you have used difference() 
-just add predicates like add(), remove() or addAfterRemoving() to each bock inside of your difference()(which is now sumUp())
+Use sumUp() where you have used difference() before,
+just add predicates like add(), remove() or addAfterRemoving() to each block inside of your difference()(which is now sumUp() of course)
 ```c#
 include<sumup.scad>
 sumUp()
 {
 	add() 
-		translate([0,0,10])
-			sphere(6);
+	  translate([0,0,10])
+	    sphere(6);
 	#translate([0,0,3])
-		remove()
-			cylinder(h=15,d=8,$fn=10);
+	  remove()
+	    cylinder(h=15,d=8,$fn=10);
 }
 ```
 ![screeen](/images/sumUpExample1.png)
 
-unlike difference() where the first block (ususally the first line in its curly brackets) is the thing you subtract from, inside sumUp the first line or block can be any of add or remove predictes.that is the first line in its curly barckets has no special meaning in sumUp(). 
+unlike difference() where  the first line or the first block inside the differences()'s curly brackets is THE THING you subtract from, 
+inside the sumUp() the first line or block can be any of add or remove predictes. that is - the first line or block inside its curly barckets has no special meaning in sumUp(). so you can constuct a solid from several lines/block/modues. you do not have to use union() to put them all together into the first block/line of the difference().
+then you can remove from this "summed" solid in the same single sumUp()
+```c#
+include<sumup.scad>
 
-sumUp() uses the prediacte to recognize if the blocki to be rmoved, removed from, or added after all removing is done. you can move the predicates inside you modules ,and call the modue withut predicate: the modue itself uses the predicates to add new things, bore holes, and say add bolts to yuor part.
+sumUp()
+{
+	remove()
+		translate([0,0,10])
+			#cube([20,12,4],center=true);
+	add() 
+		translate([0,0,10])
+			sphere(6);
+	add()
+		translate([7,4,4])
+			cylinder(h=15,d=3,$fn=10);
+}
+```
 
-in fact you could leave the brackets out alltogether like this: sumUp() allIsDoneHere();
-if the allIsDoneHere() module contains all predicates you are using.
+![screeen](/images/sumUpExample2.png)
 
-you just put the predicates in front of parts of your module tosignalize what this concrete part is used for (see below)
+sumUp() uses the prediacte to recognize if the block is to be removed, removed from, or added after all removing is done. 
 
-and you could as well use your old modules:you either add a predicate (say add() ) to modules declaration after the module name, or add it  before you call your old module form withing sumUp() likw this: 
+you can move the predicates inside your modules, and call the module without any predicate.
+the modue itself then uses predicates to add new things, bore holes, and say add bolts inside new holes to your part.
+
+you just put the predicates in front of the parts of your module to signalize what this concrete part is used for (see below)
+
+YOU CAN use your old modules:
+either without touching them:
+you add a predicate before you call your old module form withing sumUp() like this: 
 ```c#
 sumUp()
 {
@@ -35,7 +58,35 @@ sumUp()
 	remove() {  ....}
 }
 ```
-example of all above possibilities:
+or you  add a predicate (say add() ) to modules declaration after the module name, and then call it without any additional predicates like this:
+include<sumup.scad>
+```c#
+sumUp()
+{
+
+	newCubeBlockModule();
+	add() 
+		translate([0,0,10])
+			sphere(6);
+	boreHolesNewModule();
+}
+module newCubeBlockModule() add()
+{
+	translate([-2,-2,0])cube([10,10,10]);
+}
+
+module boreHolesNewModule(d=3.5,depth=17) remove() 
+{
+cylinder(d=d,h=depth);
+#translate([0,0,10])
+	rotate([0,90,90])
+		cylinder(d=d,h=depth,center=true);
+}
+
+```
+![screeen](/images/sumUpExample3.png)
+
+example of all above possibilities and a bit more:
 ![screeen](/images/sumUpExample.png)
 ```c#
 
@@ -43,26 +94,10 @@ include<sumup.scad>
 
 sumUp()
 {
-		translate([0,20,0])
+	translate([0,20,0])
 	{
-		newCubeBlockModule(); 
-		translate([8,18,0])
-			 nailWithBiggerBore($fn=20);
-	}	
-	
-	translate([0,15,5])
-		lid();
-	
-	add() 
 		anyOldModule();
-	add() 
-		translate([0,0,10])
-			sphere(6);
 	boreHolesNewModule();
-
-	translate([7,5,0])
-		remove()
-			cylinder(h=15,d=3,$fn=10);
 }
 
 
@@ -107,3 +142,7 @@ cube([10,10,10]);
 cylinder(h=15,d=10);
 }
 ```
+
+in fact you could leave the brackets out alltogether like this: sumUp() allIsDoneHere();
+if the allIsDoneHere() module contains all predicates you are using.
+
