@@ -92,7 +92,7 @@ module boreHolesNewModule(d=3.5,depth=17) remove()
 ```
 ![screeen](/images/sumUpExample3.png)
 
-if you want  your module to remove form other soids (say moke holes in the whole thing), and than add a new solid inside the holes (say Bolts) you use the _addAfterRemove()_;
+if you want  your module to remove form other solids (say moke holes in the whole thing), and than add a new solid inside the holes (say Bolts) you use the _addAfterRemove()_;
 you just put the predicates _add(),remove(), addAfterRemoving()_ in front of the parts of your module to signalize what this concrete part is used for (see below)
 ```c#
 include<sumup.scad>
@@ -127,10 +127,12 @@ for(x=[-1,1],y=[-1,1])
 ```
 ![screeen](/images/sumUpExample4.png)
 
-thats it! (almost)
+thats it! (almost).
 
-FINALLY
-it is also possible to use no predictes and use predicate variables to modify the dimensions of the part you  are creating(say increase diameter when it is subtracted.
+
+
+FINALLY: an advances use
+it is also possible to use _predicate variables_ instd of predicates to modify the dimensions of the part you  are creating(say increase its diameter when it is subtracted).
 
 With predicate variables you can write code which behaves differently (say changes diameter) depending on wheter it is curently adding removing or adding again after removing.
 this can make your code shorter and more succint, but it is less obvious to read such code.
@@ -151,7 +153,7 @@ they are pretty much explained by the definition of the coording predicates (see
 the variable 
 _$summingUp_ is introduced so your module could check if it is called from within _sumUp()_ or not, but it is not used in the examples here 
 
-here is an example using all of abov parts
+here is an example using all of above parts
 
 ![screeen](/images/sumUpExample.png)
 ```c#
