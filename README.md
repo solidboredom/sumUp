@@ -16,9 +16,27 @@ sumUp()
 }
 ```
 ![screeen](/images/sumUpExample1.png)
-unlike difference() wher the first block is the thing you subtract from, the first block inside sumUp can be any of add or remove predictes. sumUp uses the prediacte to recognize if the blocki to be rmoved, removed from, or added after all removing is done. fiurther you can move the predicates inside you modules ,and cal the modue withut predicate: the modue itself uses the predicates to add new things, bore holes, and say add bolts to yuor part. you just put the predicates in front of parts of your module which du it(see below)
 
-example of  possibilities:
+unlike difference() where the first block (ususally the first line in its curly brackets) is the thing you subtract from, inside sumUp the first line or block can be any of add or remove predictes.that is the first line in its curly barckets has no special meaning in sumUp(). 
+
+sumUp() uses the prediacte to recognize if the blocki to be rmoved, removed from, or added after all removing is done. you can move the predicates inside you modules ,and call the modue withut predicate: the modue itself uses the predicates to add new things, bore holes, and say add bolts to yuor part.
+
+in fact you could leave the brackets out alltogether like this: sumUp() allIsDoneHere();
+if the allIsDoneHere() module contains all predicates you are using.
+
+you just put the predicates in front of parts of your module tosignalize what this concrete part is used for (see below)
+
+and you could as well use your old modules:you either add a predicate (say add() ) to modules declaration after the module name, or add it  before you call your old module form withing sumUp() likw this: 
+```c#
+sumUp()
+{
+	translate([0,20,0])
+		add() anyOldModule();
+	remove() {  ....}
+}
+```
+example of all above possibilities:
+![screeen](/images/sumUpExample.png)
 ```c#
 
 include<sumup.scad>
