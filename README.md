@@ -29,14 +29,14 @@ include<sumup.scad>
 sumUp()
 {
 	remove()
-		translate([0,0,10])
-			#cube([20,12,4],center=true);
+	  translate([0,0,10])
+  	   #cube([20,12,4],center=true);
 	add() 
-		translate([0,0,10])
-			sphere(6);
+	  translate([0,0,10])
+	    sphere(6);
 	add()
-		translate([7,4,4])
-			cylinder(h=15,d=3,$fn=10);
+	  translate([7,4,4])
+	    cylinder(h=15,d=3,$fn=10);
 }
 ```
 
@@ -45,7 +45,7 @@ sumUp()
 _sumUp()_ uses the prediacte to recognize if the block is to be removed, removed from, or added after all removing is done. 
 
 you can move the predicates inside your modules, and call the module without any predicate.
-the module itself then uses predicates to add new things, *bore holes in other solids* of _SumUp()_, and say add bolts inside new holes to your part.
+the module itself then uses predicates to add new things, even BORE HOLES IN OTHER SOLIDS of _SumUp()_, and say add bolts inside new holes to your part.
 
 but YOU CAN use your old modules which do not use predicates:
 either without touching them:
@@ -54,7 +54,7 @@ you add a predicate before you call your old module form withing sumUp() like th
 sumUp()
 {
 	translate([0,20,0])
-		add() anyOldModule();
+	  add() anyOldModule();
 	remove() {  ....}
 }
 ```
@@ -66,8 +66,8 @@ sumUp()
 
 	newCubeBlockModule();
 	add() 
-		translate([0,0,10])
-			sphere(6);
+	  translate([0,0,10])
+	    sphere(6);
 	boreHolesNewModule();
 }
 module newCubeBlockModule() add()
@@ -77,10 +77,10 @@ module newCubeBlockModule() add()
 
 module boreHolesNewModule(d=3.5,depth=17) remove() 
 {
-cylinder(d=d,h=depth);
-#translate([0,0,10])
-	rotate([0,90,90])
-		cylinder(d=d,h=depth,center=true);
+  cylinder(d=d,h=depth);
+ #translate([0,0,10])
+    rotate([0,90,90])
+      cylinder(d=d,h=depth,center=true);
 }
 
 ```
@@ -97,10 +97,11 @@ include<sumup.scad>
 
 sumUp()
 {
-	translate([0,20,0])
-	{
-		anyOldModule();
-	boreHolesNewModule();
+  translate([0,20,0])
+    {
+      anyOldModule();
+      boreHolesNewModule();
+    }
 }
 
 
