@@ -17,6 +17,7 @@ sumUp()
 	  remove()
 	    cylinder(h=15,d=8,$fn=10);
 }
+ 
 ```
 ![screeen](/images/sumUpExample1.png)
 
@@ -41,8 +42,10 @@ sumUp()
 ```
 
 ![screeen](/images/sumUpExample2.png)
-
 _sumUp()_ uses the prediacte to recognize if the block is to be removed, removed from, or added after all removing is done. 
+
+_TIP: it makes no difference if you put your translate or rotate operations in front or after the predicate(say translate([...])add()cube(...); is the sme as add()translate([...])cube(...);  this allows you to group several removes() or add() in single translate() transformation. this has simplifyed the things alot for me)
+
 
 you can move the predicates inside your modules, and call the module without any predicate.
 the module itself then uses predicates to add new things, even BORE HOLES IN OTHER SOLIDS of _SumUp()_, and say add bolts inside new holes to your part.
@@ -134,8 +137,8 @@ module nailWithBiggerBore()
   if(!$beforeRemoving)
     translate([0,0,-($removing?1:0)])
        cylinder(d1=1+($removing?1:0),d2=3+($removing?2:0),h=11+($removing?1:0)); 
-```c
-thepredicate Variables are declared on the top of the sumUp.scad.
+```
+the predicate Variables are declared on the top of the sumUp.scad.
 currently the are:
 _$beforeRemoving_
 _$removing_
