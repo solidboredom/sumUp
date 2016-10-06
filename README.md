@@ -48,8 +48,10 @@ you can move the predicates inside your modules, and call the module without any
 the module itself then uses predicates to add new things, even BORE HOLES IN OTHER SOLIDS of _SumUp()_, and say add bolts inside new holes to your part.
 
 but YOU CAN use your old modules which do not use predicates:
+
 either without touching them:
-you add a predicate before you call your old module form withing sumUp() like this: 
+
+you add a predicate(add(),remove() or addAfterRemoving()) before your call your old module form withing _sumUp()_ like this: 
 ```c#
 sumUp()
 {
@@ -58,7 +60,7 @@ sumUp()
 	remove() {  ....}
 }
 ```
-or you  add a predicate (say add() ) to modules declaration after the module name, and then call it without any additional predicates like this:
+or you can modify the Module by adding a predicate (say add() ) to modules declaration line after the module name, and then call it without any additional predicates like this:
 include<sumup.scad>
 ```c#
 sumUp()
