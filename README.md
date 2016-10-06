@@ -92,8 +92,7 @@ module boreHolesNewModule(d=3.5,depth=17) remove()
 ```
 ![screeen](/images/sumUpExample3.png)
 
-if you want  your module to remove form other soids (say moke holes in the whole thing) and than add new solid inside the holes (say Bolts)
-
+if you want  your module to remove form other soids (say moke holes in the whole thing), and than add a new solid inside the holes (say Bolts) you use the _addAfterRemove()_;
 you just put the predicates _add(),remove(), addAfterRemoving()_ in front of the parts of your module to signalize what this concrete part is used for (see below)
 ```c#
 include<sumup.scad>
@@ -128,24 +127,29 @@ for(x=[-1,1],y=[-1,1])
 ```
 ![screeen](/images/sumUpExample4.png)
 
+thats it! (almost)
+
 FINALLY
-it is also possible to use no predictes and use predicate Variablesto modify the dimensions of the part you  are creating(say increse diameter when it is subtracted=.
-with predicate variables you can write code which behaves differently (say changes diameter) depending on wheter it is curently adding removing or addingAfter removing.
-this can make your code shorter and more succint but is less obvious to read such code.
+it is also possible to use no predictes and use predicate variables to modify the dimensions of the part you  are creating(say increase diameter when it is subtracted.
+
+With predicate variables you can write code which behaves differently (say changes diameter) depending on wheter it is curently adding removing or adding again after removing.
+this can make your code shorter and more succint, but it is less obvious to read such code.
 ```c#
 module nailWithBiggerBore() 
   if(!$beforeRemoving)
     translate([0,0,-($removing?1:0)])
        cylinder(d1=1+($removing?1:0),d2=3+($removing?2:0),h=11+($removing?1:0)); 
 ```
-the predicate Variables are declared on the top of the sumUp.scad.
-currently the are:
-_$beforeRemoving_
-_$removing_
- they are üretty much explained by the definition of coording predicates (see sumup.scad)
-the variable 
-_$summingUp_ is introduced so our module could check if it is called from within _sumUp()_ or not but it is not uses in 
+the predicate variables are declared on the top of the sumUp.scad.
 
+they currently the are:
+*_$beforeRemoving_
+*_$removing_
+
+they are pretty much explained by the definition of the coording predicates (see sumup.scad)
+
+the variable 
+_$summingUp_ is introduced so your module could check if it is called from within _sumUp()_ or not, but it is not used in the examples here 
 
 here is an example using all of abov parts
 
