@@ -131,8 +131,9 @@ thats it! (almost).
 
 
 
-FINALLY: an advances use
-it is also possible to use _predicate variables_ instd of predicates to modify the dimensions of the part you  are creating(say increase its diameter when it is subtracted).
+FINALLY: an advanced use:
+
+it is also possible to use _predicate variables_ instead of predicates to modify the dimensions of the part you  are creating(say increase its diameter when it is subtracted).
 
 With predicate variables you can write code which behaves differently (say changes diameter) depending on wheter it is curently adding removing or adding again after removing.
 this can make your code shorter and more succint, but it is less obvious to read such code.
@@ -145,13 +146,19 @@ module nailWithBiggerBore()
 the predicate variables are declared on the top of the sumUp.scad.
 
 they currently the are:
-*_$beforeRemoving_
-*_$removing_
+
+_$beforeRemoving_
+
+_$removing_
+
 
 they are pretty much explained by the definition of the coording predicates (see sumup.scad)
 
 the variable 
-_$summingUp_ is introduced so your module could check if it is called from within _sumUp()_ or not, but it is not used in the examples here 
+
+_$summingUp_ 
+
+is introduced so your module could check if it is called from within _sumUp()_ or not, but it is not used in the examples here 
 
 here is an example using all of above parts
 
