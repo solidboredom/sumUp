@@ -61,22 +61,23 @@ sumUp()
 }
 ```
 or you can modify the Module by adding a predicate (say add() ) to modules declaration line after the module name, and then call it without any additional predicates like this:
-include<sumup.scad>
+
 ```c#
+include<sumup.scad>
+
 sumUp()
 {
-
 	newCubeBlockModule();
 	add() 
 	  translate([0,0,10])
 	    sphere(6);
 	boreHolesNewModule();
 }
+
 module newCubeBlockModule() add()
 {
 	translate([-2,-2,0])cube([10,10,10]);
 }
-
 module boreHolesNewModule(d=3.5,depth=17) remove() 
 {
   cylinder(d=d,h=depth);
@@ -88,10 +89,63 @@ module boreHolesNewModule(d=3.5,depth=17) remove()
 ```
 ![screeen](/images/sumUpExample3.png)
 
-you just put the predicates in front of the parts of your module to signalize what this concrete part is used for (see below)
+if you want  your module to remove form other soids (say moke holes in the whole thing) and than add new solid inside the holes (say Bolts)
+
+you just put the predicates _add(),remove(), addAfterRemoving()_ in front of the parts of your module to signalize what this concrete part is used for (see below)
+```c#
+include<sumup.scad>
+
+sumUp()
+{
+  add()
+    cube([20,20,7],center=true);
+  lidWithNailsAndWasher();
+}
+
+//== modules below  ==
+module lidWithNailsAndWasher()
+{
+  add() //washer
+	translate([0,0,8])
+  	   cube([20,20,1],center=true);
+  addAfterRemoving() //top cover without holes
+     translate([0,0,11])
+	   color("green")
+         cube([17,17,2],center=true);
+for(x=[-1,1],y=[-1,1])
+  translate([x*7,y*7,2])
+  {
+    remove() 
+	  cylinder(h=25,d=4.5,center=true);
+   #addAfterRemoving() 
+      cylinder(h=10,d2=3,d1=1);
+  }
+}
+
+```
+![screeen](/images/sumUpExample4.png)
+
+FINALLY
+it is also possible to use no predictes and use predicate Variablesto modify the dimensions of the part you  are creating(say increse diameter when it is subtracted=.
+with predicate variables you can write code which behaves differently (say changes diameter) depending on wheter it is curently adding removing or addingAfter removing.
+this can make your code shorter and more succint but is less obvious to read such code.
+```c#
+module nailWithBiggerBore() 
+  if(!$beforeRemoving)
+    translate([0,0,-($removing?1:0)])
+       cylinder(d1=1+($removing?1:0),d2=3+($removing?2:0),h=11+($removing?1:0)); 
+```c
+thepredicate Variables are declared on the top of the sumUp.scad.
+currently the are:
+_$beforeRemoving_
+_$removing_
+ they are üretty much explained by the definition of coording predicates (see sumup.scad)
+the variable 
+_$summingUp_ is introduced so our module could check if it is called from within _sumUp()_ or not but it is not uses in 
 
 
-example of all above possibilities and a bit more:
+here is an example using all of abov parts
+
 ![screeen](/images/sumUpExample.png)
 ```c#
 
@@ -149,6 +203,6 @@ cylinder(h=15,d=10);
 }
 ```
 
-in fact you could leave the brackets out alltogether like this: sumUp() allIsDoneHere();
-if the allIsDoneHere() module contains all predicates you are using.
+_TIP: in fact you could leave the brackets out alltogether like this: sumUp() allIsDoneHere();
+if the allIsDoneHere() module contains all predicates you are using._
 
