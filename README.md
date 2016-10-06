@@ -1,5 +1,5 @@
 # sumUp
-*sumUp()* ispowerful replacement for openscads *difference()* (although you still might want to use _difference()_ in some cases - so it is a comletion)
+*sumUp()* is apowerful replacement for openscads *difference()* (although you still might want to use _difference()_ in some cases - so it is rather comlementary)
 
 it allows you to ADD HOLES in modules and a more flexibe, but descriptive syntax by using _predicates_. it usually requires less nesting in your code than _difference()_. 
 it is very compact: only two pages of code in a single include file you will need.
@@ -45,14 +45,13 @@ sumUp()
 
 _sumUp()_ uses the prediacte to recognize if the block is to be removed, removed from, or added after all removing is done. 
 
-*TIP: it makes no difference if you put your translate or rotate operations in front or after the predicate(say translate([...])add()cube(...); is the sme as add()translate([...])cube(...);  this allows you to group several removes() or add() in single translate() transformation. this has simplifyed the things alot for me)*
+*TIP: it makes no difference if you put your translate or rotate operations in front or after the predicate(say translate([...])add()cube(...); is the sme as add()translate([...])cube(...);  this allows you to group several removes() or add() in single translate() or rotate transformation. this has simplifyed the things alot for me)*
 
 
-you can move the predicates inside your modules, and call the module without any predicate.
-the module itself then uses predicates to add new things, even BORE HOLES IN OTHER SOLIDS of _SumUp()_, and say add bolts inside new holes to your part.
+you can move the predicates to the inside of your modules, and call the module without any predicate.
+the module itself then uses predicates to add new things, even BORE HOLES IN OTHER SOLIDS of _SumUp()_, and say add bolts inside the new holes to your part.
 
-but YOU CAN use your old modules which do not use predicates:
-
+YOU CAN use your old modules which do not use predicates:
 either without touching them:
 
 you add a predicate(add(),remove() or addAfterRemoving()) before your call your old module form withing _sumUp()_ like this: 
@@ -64,7 +63,7 @@ sumUp()
 	remove() {  ....}
 }
 ```
-or you can modify the Module by adding a predicate (say add() ) to modules declaration line after the module name, and then call it without any additional predicates like this:
+or you can modify the Module by adding a predicate (say add() ) to the modules declaration line after the module name, and then call it without any additional predicates like this:
 
 ```c#
 include<sumup.scad>
@@ -207,6 +206,6 @@ cylinder(h=15,d=10);
 }
 ```
 
-_TIP: in fact you could leave the brackets out alltogether like this: sumUp() allIsDoneHere();
-if the allIsDoneHere() module contains all predicates you are using._
+*_TIP: in fact you could leave the brackets out alltogether like this: sumUp() allIsDoneHere();
+if the allIsDoneHere() module contains all predicates you are using._*
 
