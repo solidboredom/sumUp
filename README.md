@@ -1,8 +1,8 @@
 # sumUp
-*sumUp()* is a more powerful replacement for *difference()* 
+*sumUp()* is a more powerful replacement for openscads *difference()* 
 
-it is an openscad prefix library that allows to add holes in modules and allows more flexibe, but descriptive syntax by using predicates. it usually requires less nesting in your code. 
-it is very compact: only 2 pages in a single file you need
+it allows you to add holes in modules and a more flexibe, but descriptive syntax by using _predicates_. it usually requires less nesting in your code. 
+it is very compact: only 2 pages in a single icnlude file you will need
 
 Use *sumUp()* where you have used *difference()* before,
 just add one of predicates like *add()*, *remove()* or *addAfterRemoving()* to each block inside of your difference()(which is now a *sumUp()* of course)
@@ -20,9 +20,9 @@ sumUp()
 ```
 ![screeen](/images/sumUpExample1.png)
 
-unlike difference() where  the first line or the first block inside the differences()'s curly brackets is THE THING you subtract from, 
-inside the sumUp() the first line or block can be any of add or remove predictes. that is - the first line or block inside its curly barckets has no special meaning in sumUp(). so you can constuct a solid from several lines/block/modues. you do not have to use union() to put them all together into the first block/line of the difference().
-then you can remove from this "summed" solid in the same single sumUp()
+unlike _difference()_ where  the first line or the first block inside the _difference()_'s curly brackets is THE THING you subtract from, 
+inside the _sumUp()_ the first line or block can be any of add or remove predictes. that is - the first line or block inside its curly barckets has no special meaning in sumUp(). so you can constuct a solid from several lines/block/modues. you do not have to use _union()_ to put them all together into the first block/line of the _difference()_.
+then you can remove from this "summed" solid in the same single _sumUp()_
 ```c#
 include<sumup.scad>
 
@@ -42,14 +42,12 @@ sumUp()
 
 ![screeen](/images/sumUpExample2.png)
 
-sumUp() uses the prediacte to recognize if the block is to be removed, removed from, or added after all removing is done. 
+_sumUp()_ uses the prediacte to recognize if the block is to be removed, removed from, or added after all removing is done. 
 
 you can move the predicates inside your modules, and call the module without any predicate.
-the modue itself then uses predicates to add new things, bore holes, and say add bolts inside new holes to your part.
+the module itself then uses predicates to add new things, bore holes, and say add bolts inside new holes to your part.
 
-you just put the predicates in front of the parts of your module to signalize what this concrete part is used for (see below)
-
-YOU CAN use your old modules:
+but YOU CAN use your old modules which do not use predicates:
 either without touching them:
 you add a predicate before you call your old module form withing sumUp() like this: 
 ```c#
@@ -87,6 +85,9 @@ cylinder(d=d,h=depth);
 
 ```
 ![screeen](/images/sumUpExample3.png)
+
+you just put the predicates in front of the parts of your module to signalize what this concrete part is used for (see below)
+
 
 example of all above possibilities and a bit more:
 ![screeen](/images/sumUpExample.png)
