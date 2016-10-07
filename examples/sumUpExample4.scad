@@ -1,3 +1,5 @@
+
+//Copyright and related rights waived by the author via CC0
 include<sumup.scad>
 
 sumUp()

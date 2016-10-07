@@ -1,3 +1,4 @@
+//Copyright and related rights waived by the author via CC0
 
 $summingUp=false;
 $beforeRemoving=false;
