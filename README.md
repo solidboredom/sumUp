@@ -12,22 +12,12 @@ To the extent possible under law,
    href="https://github.com/solidboredom">
   <span property="dct:title">pproj</span></a>
 has waived all copyright and related or neighboring rights to
-<<<<<<< HEAD
 <span property="dct:title">sumUp() library for openscad a replacement for difference() in many cases</span>.
-=======
-<span property="dct:title">sumUp() library for opencad a replacement for difference() in many cases</span>.
->>>>>>> 786ae9c2193c98876eca5ba1125cbb2640550e8d
 
-This work is published from: <span property="vcard:Country" datatype="dct:ISO3166"
-
-    content="DE" about="https://github.com/solidboredom">
+This work is published from: <span property="vcard:Country" datatype="dct:ISO3166"    content="DE" about="https://github.com/solidboredom">
 Germany</span>.
 
 </p>
-<<<<<<< HEAD
-
-=======
->>>>>>> 786ae9c2193c98876eca5ba1125cbb2640550e8d
 # sumUp
 *sumUp()* is apowerful replacement for openscads *difference()* (although you still might want to use _difference()_ in some cases - so it is rather comlementary)
 
