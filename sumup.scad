@@ -24,42 +24,42 @@ module assemble(steplist)
 {
  for(step = steplist)
  {
- 	$currentStep=step;
+ 	$currentBody=step;
  	children();
  }
- //$currentStep=undef;
+ //$currentBody=undef;
  //	children();
 }
 module only(body)
 {
-	if( $currentStep == undef 
+	if( $currentBody == undef 
 		|| body == undef 
-		|| contains($currentStep,body)
+		|| contains($currentBody,body)
 		)
 		children();
 
 }
 module addTo(body)
 {
-	if( $currentStep == undef 
+	if( $currentBody == undef 
 		|| body == undef 
-		|| contains($currentStep,body)
+		|| contains($currentBody,body)
 		)
 		add()children();
 }
 module limitTo(body)
 {
-	if( $currentStep == undef 
+	if( $currentBody == undef 
 		|| body == undef 
-		|| contains($currentStep,body)
+		|| contains($currentBody,body)
 		)
 		limit()children();
 }
 module removeFrom(body)
 {
-	if( $currentStep == undef 
+	if( $currentBody == undef 
 		|| body == undef 
-		|| contains($currentStep,body)
+		|| contains($currentBody,body)
 		)
 		remove()children();
 }
