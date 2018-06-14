@@ -1,5 +1,12 @@
 
 function contains(where,what) =  (len([for(el=toStrV(where))if(str(what)==el)1])!=0)?true:false;
+function containsOneOf(where,commaSeparatedListOfWhat) =  (len([for(el=split(commaSeparatedListOfWhat,","))if(contains(where,el))1])!=0)?true:false;
+
+
+function split(str, sep=" ", i=0, word="", v=[]) =
+	i == len(str) ? concat(v, word) :
+	str[i] == sep ? split(str, sep, i+1, "", concat(v, word)) :
+	split(str, sep, i+1, str(word, str[i]), v);
 
 
 //Copyright and related rights waived by the author via CC0
@@ -30,11 +37,12 @@ module assemble(steplist)
  //$currentBody=undef;
  //	children();
 }
+function ifBodyIs(body, ifTrue, ifFalse=0) = (containsOneOf($currentBody,body))? ifTrue : ifFalse;
 module only(body)
 {
 	if( $currentBody == undef 
 		|| body == undef 
-		|| contains($currentBody,body)
+		|| containsOneOf($currentBody,body)
 		)
 		children();
 
