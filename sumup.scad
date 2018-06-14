@@ -30,11 +30,38 @@ module assemble(steplist)
  //$currentStep=undef;
  //	children();
 }
-module only(step)
+module only(body)
 {
-	if($currentStep== undef || contains($currentStep,step))
+	if( $currentStep == undef 
+		|| body == undef 
+		|| contains($currentStep,body)
+		)
 		children();
 
+}
+module addTo(body)
+{
+	if( $currentStep == undef 
+		|| body == undef 
+		|| contains($currentStep,body)
+		)
+		add()children();
+}
+module limitTo(body)
+{
+	if( $currentStep == undef 
+		|| body == undef 
+		|| contains($currentStep,body)
+		)
+		limit()children();
+}
+module removeFrom(body)
+{
+	if( $currentStep == undef 
+		|| body == undef 
+		|| contains($currentStep,body)
+		)
+		remove()children();
 }
 
 module invert(off=false)
@@ -150,47 +177,46 @@ module sumUp(showRemovedOnly=false)
 	}
 }
 
-module addTo(body)
-{
-	only(body)add()children();
-}
-module removeFrom(body)
-{
-	only(body)remove()children();
-}
-
-module add()
+module add(body)
 {
 	partOfAddAfterRemoving=false;
-	if(!$removing && $beforeRemoving) 
-		children([0:$children-1]);
+	if(
+		(!$removing && $beforeRemoving)) 
+			children([0:$children-1]);
 }
 
-module limiter()
+module limiter(body)
 {
 	partOfAddAfterRemoving=false;
-if(($limiting && !$removing )|| $addingLimiter) 
+if(
+		(($limiting && !$removing )|| $addingLimiter)) 
 	{
 			$beforeRemoving = true;
 			children([0:$children-1]);
 	}
 }
 
-module remove()
+module remove(body)
 {
 	partOfAddAfterRemoving=false;
-	if($removing && !$beforeRemoving &&!$removingAgain )children([0:$children-1]);
+	if(
+		($removing && !$beforeRemoving &&!$removingAgain ))
+			children([0:$children-1]);
 }
 
 
-module addAfterRemoving()
+module addAfterRemoving(body)
 {
 	$partOfAddAfterRemoving=true;
-	if(!$beforeRemoving && !$removing && !$removingAgain)children([0:$children-1]);
+	if(		
+		(!$beforeRemoving && !$removing && !$removingAgain))
+			children([0:$children-1]);
 }
 module removeAgain()
 {
 	partOfAddAfterRemoving=true;
-	if(!$beforeRemoving && !$removing && $removingAgain)children([0:$children-1]);
+	if(
+		(!$beforeRemoving && !$removing && $removingAgain))
+			children([0:$children-1]);
 }
 
