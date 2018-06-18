@@ -71,10 +71,11 @@ module removeFrom(body)
 		)
 		remove()children();
 }
-
-module invert(off=false)
+//gives the possibility to set solid=false, which is normally true when invert() 
+module invert(off=false,solid=true)
 {
 $inverted=off?false:true;
+$solid=(solid==undef)?$solid:solid;
 children();
 }
 
