@@ -27,9 +27,9 @@ $inverted=false;
 function isAddingFirst()=($summingUp && !$removing  && $beforeRemoving);
 //function isAddingAgain()=($summingUp && !($beforeRemoving || $removing));
 
-module assemble(steplist)
+module assemble(bodyListCommaSeparated)
 {
- for(step = steplist)
+ for(step = split(bodyListCommaSeparated,","))
  {
  	$currentBody=step;
  	children();
