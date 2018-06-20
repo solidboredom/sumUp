@@ -38,14 +38,41 @@ module assemble(bodyListCommaSeparated)
  //	children();
 }
 function ifBodyIs(body, ifTrue, ifFalse=0) = (containsOneOf($currentBody,body))? ifTrue : ifFalse;
-module only(body)
+
+module only(all,add,remove)
 {
-	if( $currentBody == undef 
-		|| body == undef 
-		|| containsOneOf($currentBody,body)
+if( $currentBody == undef 
+		|| (all == undef && add == undef && remove== undef)
+		|| ((all != undef) && containsOneOf($currentBody,all))
 		)
 		children();
 
+if( (add != undef && $currentBody!= undef) 
+	&& containsOneOf($currentBody,add)
+		)
+		add()children();
+
+if(  (remove != undef && $currentBody!= undef) 
+	&& containsOneOf($currentBody,remove)
+		)
+		remove()children();
+
+	/*if($currentBody == undef ||
+		(all == undef 
+			&& add == undef 
+			&& remove == undef)  )children();
+*/
+/*	else
+	{ if( containsOneOf($currentBody,all)
+		)
+		children();
+	if(  containsOneOf($currentBody,add)
+		)
+		add()children();
+	if(  containsOneOf($currentBody,remove)
+		)
+		remove()children();
+	}*/
 }
 module addTo(body)
 {
