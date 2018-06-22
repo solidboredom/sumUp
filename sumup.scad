@@ -78,7 +78,7 @@ module addTo(body)
 {
 	if( $currentBody == undef 
 		|| body == undef 
-		|| contains($currentBody,body)
+		|| containsOneOf($currentBody,body)
 		)
 		add()children();
 }
@@ -86,7 +86,7 @@ module limitTo(body)
 {
 	if( $currentBody == undef 
 		|| body == undef 
-		|| contains($currentBody,body)
+		|| containsOneOf($currentBody,body)
 		)
 		limit()children();
 }
@@ -94,7 +94,7 @@ module removeFrom(body)
 {
 	if( $currentBody == undef 
 		|| body == undef 
-		|| contains($currentBody,body)
+		|| containsOneOf($currentBody,body)
 		)
 		remove()children();
 }
