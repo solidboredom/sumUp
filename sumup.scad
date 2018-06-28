@@ -135,7 +135,7 @@ module makeHollow()
 } 
 
 
-module sumUp(showRemovedOnly=false)
+module sumUp(showRemovedOnly=false,limiters=false)
 {
 	$addingLimiter=false;
 	$beforeRemoving=false;		
@@ -151,23 +151,25 @@ module sumUp(showRemovedOnly=false)
 			
 			intersection()
 			{
-			union()
-			{
-				$limiting=false;
-				$beforeRemoving=true;
-				$removing=false;
-				children([0:$children-1]);
-			}
-			union()
-			{
-				$limiting=true;
-				$addingLimiter=false;
-				$beforeRemoving=false;
-				$removing=false;
-				children([0:$children-1]);
-			}
-			}
 				union()
+				{
+					$limiting=false;
+					$beforeRemoving=true;
+					$removing=false;
+					children([0:$children-1]);
+				}
+				
+				if(limiters)union()
+				{
+					$limiting=true;
+					$addingLimiter=false;
+					$beforeRemoving=false;
+					$removing=false;
+					children([0:$children-1]);
+				}
+			}
+			
+			union()
 			{
 				$limiting=false;
 				$addingLimiter=true;
