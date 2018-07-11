@@ -24,8 +24,9 @@ $inverted=false;
 
 
 
-function isAddingFirst()=($summingUp && !$removing  && $beforeRemoving);
-//function isAddingAgain()=($summingUp && !($beforeRemoving || $removing));
+function isAddingFirst()= (    $summingUp 
+							&& !$removing  
+							&& $beforeRemoving );
 
 module assemble(bodyListCommaSeparated)
 {
@@ -37,42 +38,30 @@ module assemble(bodyListCommaSeparated)
  //$currentBody=undef;
  //	children();
 }
-function ifBodyIs(body, ifTrue, ifFalse=0) = (containsOneOf($currentBody,body))? ifTrue : ifFalse;
+
+function currentBodyIn(bodySet) = ( ($currentBody != undef) 
+	  				   && (bodySet != undef) 
+	  				   && containsOneOf($currentBody,bodySet) )
+					    ? (true) : (false);
+
+function ifBodyIs(bodySet, ifTrue, ifFalse=0) = currentBodyIn(bodySet)
+						? ifTrue : ifFalse;
 
 module only(all,add,remove)
 {
 if( $currentBody == undef 
 		|| (all == undef && add == undef && remove== undef)
-		|| ((all != undef) && containsOneOf($currentBody,all))
+		|| currentBodyIn (all)
 		)
 		children();
 
-if( (add != undef && $currentBody!= undef) 
-	&& containsOneOf($currentBody,add)
-		)
+ if( currentBodyIn (add))
 		add()children();
 
-if(  (remove != undef && $currentBody!= undef) 
-	&& containsOneOf($currentBody,remove)
-		)
+if(  currentBodyIn(remove)) 
 		remove()children();
 
-	/*if($currentBody == undef ||
-		(all == undef 
-			&& add == undef 
-			&& remove == undef)  )children();
-*/
-/*	else
-	{ if( containsOneOf($currentBody,all)
-		)
-		children();
-	if(  containsOneOf($currentBody,add)
-		)
-		add()children();
-	if(  containsOneOf($currentBody,remove)
-		)
-		remove()children();
-	}*/
+
 }
 module addTo(body)
 {
@@ -258,3 +247,19 @@ module removeAgain()
 			children([0:$children-1]);
 }
 
+	/*if($currentBody == undef ||
+		(all == undef 
+			&& add == undef 
+			&& remove == undef)  )children();
+*/
+/*	else
+	{ if( containsOneOf($currentBody,all)
+		)
+		children();
+	if(  containsOneOf($currentBody,add)
+		)
+		add()children();
+	if(  containsOneOf($currentBody,remove)
+		)
+		remove()children();
+	}*/
